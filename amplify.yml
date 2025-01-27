@@ -15,7 +15,7 @@ frontend:
       commands:
         - echo "Build complete, checking status"
         - echo "Checking if the build failed"
-        - if [ "$BUILD_FAILED" = "true" ]; then node ./scripts/deploy.js; else echo "Build succeeded, no rollback needed"; fi  # Call deploy.js only if build failed
+        - - if [ $? -ne 0 ]; then node ./scripts/deploy.js; else echo "Build succeeded, no rollback needed"; fi   # Call deploy.js only if build failed
   artifacts:
     baseDirectory: dist
     files:
