@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
+import type { Schema } from "../amplify/data/resource.js";
 import { generateClient } from "aws-amplify/data";
 
 const client = generateClient<Schema>();
@@ -23,7 +23,7 @@ function App() {
 
   return (
     <main>
-      <h1>React todos</h1>
+      <h1>React todos ${</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
