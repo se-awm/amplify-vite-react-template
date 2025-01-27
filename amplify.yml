@@ -14,11 +14,8 @@ frontend:
     postBuild:
       commands:
         - echo "Build complete, checking status"
-        # You can add custom logic here to call the rollback script if build fails
-    finally:
-      commands:
-        - echo "Running rollback if the build failed"
-        - node ./scripts/deploy.js  # This is where your rollback script is called
+        - echo "Checking if the build failed"
+        - if [ "$BUILD_FAILED" = "true" ]; then node ./scripts/deploy.js; else echo "Build succeeded, no rollback needed"; fi  # Call deploy.js only if build failed
   artifacts:
     baseDirectory: dist
     files:
