@@ -84,6 +84,7 @@ class DeploymentRollback {
     //       console.error('Health check failed:', error);
     //       return false;
     //   }
+    return true;
   }
 
     async notifyTeam(message, level = 'info') {

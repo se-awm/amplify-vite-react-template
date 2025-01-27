@@ -11,9 +11,13 @@ async function deploy() {
     await rollback.initialize();
     await rollback.createDeploymentBackup();
 
+    console.log("Starting deployment...");
+
+    execSync("aws sts get-caller-identity --profile non-production", { stdio: 'inherit' });
+
     // Your deployment commands here
-    execSync("npm run build");
-    execSync("amplify push");
+    execSync("npm run build", { stdio: 'inherit' });
+    execSync("amplify push --debug", { stdio: 'inherit' });
 
     // Verify deployment
     const isHealthy = await rollback.performHealthCheck();
