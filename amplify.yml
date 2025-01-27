@@ -9,7 +9,8 @@ frontend:
   phases:
     build:
       commands:
-        - npm run build || echo "Build failed, continuing to next phase"
+        - chmod +x ./scripts/build.sh  # Make sure the script is executable
+        - ./scripts/build.sh  # Run the custom build script
     postBuild:
       commands:
         - echo "Build complete, checking status"
