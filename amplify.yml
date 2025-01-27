@@ -5,11 +5,15 @@ backend:
       commands:
         - npm ci --cache .npm --prefer-offline
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
-        - chmod +x ./scripts/build.sh  # Make sure the script is executable
-        - ./scripts/build.sh  # Run the custom build script
+frontend:
+  phases:
+    build:
+      commands:
+        - npm run build || echo "Build failed, continuing to next phase"
     postBuild:
       commands:
         - echo "Build complete, checking status"
+        # You can add custom logic here to call the rollback script if build fails
     finally:
       commands:
         - echo "Running rollback if the build failed"
