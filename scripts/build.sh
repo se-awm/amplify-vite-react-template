@@ -5,9 +5,10 @@ npm run build
 
 # Check if the build command failed
 if [ $? -ne 0 ]; then
-  echo "Build failed"
-  exit 1  # Return a non-zero exit code if build fails
+  echo "Build failed, triggering rollback"
+  node ./scripts/deploy.js  # Call the deploy.js script for rollback
+  exit 1  # Exit with a failure code to indicate the build failed
 else
   echo "Build succeeded"
-  exit 0  # Return 0 exit code if build succeeds
+  exit 0  # Exit with a success code
 fi

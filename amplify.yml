@@ -9,17 +9,12 @@ frontend:
   phases:
     build:
       commands:
-        - chmod +x ./scripts/build.sh  # Make sure the script is executable
-        - ./scripts/build.sh  # Run the custom build script
-    postBuild:
-      commands:
-        - echo "Build complete, checking status"
-        - echo "Checking if the build failed"
-        - if [ $? -ne 0 ]; then node ./scripts/deploy.js; else echo "Build succeeded, no rollback needed"; fi   # Call deploy.js only if build failed
+        - chmod +x ./scripts/build.sh # Ensure the script is executable
+        - ./scripts/build.sh # Run the custom build script
   artifacts:
     baseDirectory: dist
     files:
-      - '**/*'
+      - "**/*"
   cache:
     paths:
       - .npm/**/*
